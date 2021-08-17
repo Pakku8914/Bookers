@@ -33,6 +33,7 @@ h1 {
 
 p, t, td{
   font-size: 13px;
+  padding: 1px 5px 7px;
 }
 
 .ribon,.link {
@@ -49,4 +50,12 @@ p, t, td{
 
 tr {
   margin-bottom: 5px;
+}
+
+.link {
+  margin-right: 5px;
+}
+
+.bold {
+  font-weight: bold;
 }

@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   def index
     #Bookにデータが入るということを教えるだけ
     @book = Book.new
+    @books = Book.all
   end
 
   # idの数字を受け取って、実行
@@ -14,14 +15,31 @@ class BooksController < ApplicationController
 
   def create
     # Bookテーブルに情報を入れる
-    # book_paramsにデータが入っているので、引数に指定すると、代入される
+    # book_params関数にデータが入っているので、引数に指定すると、代入される
     @book = Book.new(book_params)
-    @book.save
-    # idの数字を渡す
-    redirect_to book_path(@book.id)
+    if @book.save
+      # idの数字を渡す
+      redirect_to book_path(@book.id)
+    else
+      @books = Book.all
+      render :index
+    end
   end
 
   def edit
+    @book = Book.find(params[:id])
+  end
+  
+  def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path(book.id)
+  end
+  
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
   end
 
   private
